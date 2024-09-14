@@ -10,5 +10,4 @@ line1 = Line(
     end_point,
 )
 win.draw_line(line1, fill_color="red")
-print(win.debug_print())
 win.wait_for_close()

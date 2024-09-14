@@ -28,8 +28,3 @@ class Window:
 
     def draw_line(self, line, fill_color):
         line.draw(self.__canvas, fill_color)
-
-    def debug_print(self):
-        print(f"Window width: {self.width}")
-        print(f"Window height: {self.height}")
-        print(f"Window is running: {self.is_running}")

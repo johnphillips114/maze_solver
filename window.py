@@ -9,7 +9,7 @@ class Window:
         self.__root.title = ""
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
         self.__canvas = Canvas(self.__root)
-        self.__canvas.pack()
+        self.__canvas.pack(expand=1)
         self.is_running = False
 
     def redraw(self):

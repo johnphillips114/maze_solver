@@ -20,6 +20,7 @@ class Cell:
         self._x2 = bottom_right.x
         self._y1 = top_left.y
         self._y2 = bottom_right.y
+        self.visited = False
         self._win = win
 
     def draw(self, top_left=None, bottom_right=None):

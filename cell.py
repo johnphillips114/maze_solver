@@ -27,26 +27,41 @@ class Cell:
             top_left = Point(self._x1, self._y1)
         if not bottom_right:
             bottom_right = Point(self._x2, self._y2)
+        start_point = Point(top_left.x, top_left.y)
+        end_point = Point(top_left.x, bottom_right.y)
+        line = Line(start_point, end_point)
         if self.has_left_wall:
-            start_point = Point(top_left.x, top_left.y)
-            end_point = Point(top_left.x, bottom_right.y)
-            line = Line(start_point, end_point)
-            self._win.draw_line(line, "black")
+            color = "black"
+        else:
+            color = "white"
+        self._win.draw_line(line, color)
+        
+        start_point = Point(top_left.x, top_left.y)
+        end_point = Point(bottom_right.x, top_left.y)
+        line = Line(start_point, end_point)
         if self.has_top_wall:
-            start_point = Point(top_left.x, top_left.y)
-            end_point = Point(bottom_right.x, top_left.y)
-            line = Line(start_point, end_point)
-            self._win.draw_line(line, "black")
+            color = "black"
+        else:
+            color = "white"
+        self._win.draw_line(line, color)
+
+        start_point = Point(bottom_right.x, top_left.y)
+        end_point = Point(bottom_right.x, bottom_right.y)
+        line = Line(start_point, end_point)
         if self.has_right_wall:
-            start_point = Point(bottom_right.x, top_left.y)
-            end_point = Point(bottom_right.x, bottom_right.y)
-            line = Line(start_point, end_point)
-            self._win.draw_line(line, "black")
+            color = "black"
+        else:
+            color = "white"
+        self._win.draw_line(line, color)
+
+        start_point = Point(top_left.x, bottom_right.y)
+        end_point = Point(bottom_right.x, bottom_right.y)
+        line = Line(start_point, end_point)
         if self.has_bottom_wall:
-            start_point = Point(top_left.x, bottom_right.y)
-            end_point = Point(bottom_right.x, bottom_right.y)
-            line = Line(start_point, end_point)
-            self._win.draw_line(line, "black")
+            color = "black"
+        else:
+            color = "white"
+        self._win.draw_line(line, color)
 
     def draw_move(self, to_cell, undo=False):
         if undo:

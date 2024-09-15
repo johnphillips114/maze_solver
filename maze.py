@@ -55,8 +55,8 @@ class Maze:
     
     def _animate(self):
         while self.win.is_running:
+            sleep(0.5)
             self.win.redraw()
-            sleep(0.7)
             
     def _break_entrance_and_exit(self):
         entrance = self._cells[0][0]
@@ -71,18 +71,23 @@ class Maze:
         self._animate()
 
     def _break_walls_r(self, i, j):
+        print(f"Starting break_walls_r at {i}, {j}")
         self._cells[i][j].visited = True
         need_to_visit = []
         adjacent_cells = self._get_adjacent_cells(i, j)
+        print(f"adjacent cells: {adjacent_cells}")
         for adjacent_cell in adjacent_cells:
             if adjacent_cell == None:
                 continue
+            print(f"One of the adjacent cells: {adjacent_cell}")
+            print(f"Has it been visited: {self._cells[adjacent_cell[0]][adjacent_cell[1]].visited}")
             if self._cells[adjacent_cell[0]][adjacent_cell[1]].visited == False:
                 need_to_visit.append(adjacent_cell)
         if need_to_visit == []:
             self._cells[i][j].draw()
             return
-        print(f"in ({i}, {j}) - Need to visit these cells: {need_to_visit}")
+        if i == 0:
+            print(f"in ({i}, {j}) - Need to visit these cells: {need_to_visit}")
         rand_direction = random.randrange(0,len(adjacent_cells))
         while adjacent_cells[rand_direction] == None:
             rand_direction = random.randrange(0,len(adjacent_cells))
@@ -90,7 +95,6 @@ class Maze:
         
         # break down right side
         if rand_direction == 0:
-            print(f"Breaking down right side")
             self._cells[i][j].has_right_wall = False
             self._cells[i][j].draw()
             if i < self.num_cols - 1:
@@ -99,7 +103,6 @@ class Maze:
                 target_cell.draw()
         # break down left side
         if rand_direction == 1:
-            print(f"Breaking down left side")
             self._cells[i][j].has_left_wall = False
             self._cells[i][j].draw()
             if i > 0:
@@ -108,7 +111,6 @@ class Maze:
                 target_cell.draw()
         # break down bottom
         if rand_direction == 2:
-            print(f"Breaking down bottom side")
             self._cells[i][j].has_bottom_wall = False
             self._cells[i][j].draw()
             if j < self.num_rows - 1:
@@ -117,14 +119,14 @@ class Maze:
                 target_cell.draw()
         # break down top
         if rand_direction == 3:
-            print(f"Breaking down top side")
             self._cells[i][j].has_top_wall = False
             self._cells[i][j].draw()
             if j > 0:
                 target_cell = self._cells[i][j+1]
                 target_cell.has_bottom_wall = False
                 target_cell.draw()
-
+        self._animate()
+        
         self._break_walls_r(adjacent_cells[rand_direction][0], adjacent_cells[rand_direction][1])
         self._reset_cells_visited()
         
@@ -150,4 +152,6 @@ class Maze:
     def _reset_cells_visited(self):
         for column in self._cells:
             for cell in column:
+                if cell.visited == True:
+                    print(f"visited: {cell.visited} top-left: {cell._x1}, {cell._y1} - bottom-right: {cell._x2}, {cell._y2}")
                 cell.visited = False

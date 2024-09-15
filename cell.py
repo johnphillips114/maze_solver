@@ -33,7 +33,7 @@ class Cell:
         if self.has_left_wall:
             color = "black"
         else:
-            color = "white"
+            color = "#d9d9d9"
         self._win.draw_line(line, color)
         
         start_point = Point(top_left.x, top_left.y)
@@ -42,7 +42,7 @@ class Cell:
         if self.has_top_wall:
             color = "black"
         else:
-            color = "white"
+            color = "#d9d9d9"
         self._win.draw_line(line, color)
 
         start_point = Point(bottom_right.x, top_left.y)
@@ -51,7 +51,7 @@ class Cell:
         if self.has_right_wall:
             color = "black"
         else:
-            color = "white"
+            color = "#d9d9d9"
         self._win.draw_line(line, color)
 
         start_point = Point(top_left.x, bottom_right.y)
@@ -60,7 +60,7 @@ class Cell:
         if self.has_bottom_wall:
             color = "black"
         else:
-            color = "white"
+            color = "#d9d9d9"
         self._win.draw_line(line, color)
 
     def draw_move(self, to_cell, undo=False):

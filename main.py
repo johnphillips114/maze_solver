@@ -1,7 +1,4 @@
-from cell import Cell
-from line import Line
 from maze import Maze
-from point import Point
 from window import Window
 
 win = Window(1200, 800)
